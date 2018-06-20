@@ -1,0 +1,14 @@
+terraform.tfplan
+terraform.tfstate
+*.terraform.tfstate.lock.info
+.vagrant/
+.DS_Store
+*.backup
+.terraform/
+*.log
+*.bak
+.*.swp
+
+# Test exclusions
+!command/test-fixtures/**/*.tfstate
+!command/test-fixtures/**/.terraform/

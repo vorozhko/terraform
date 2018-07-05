@@ -8,6 +8,7 @@ terraform.tfstate
 *.log
 *.bak
 .*.swp
+config-map-aws-auth.yaml
 
 # Test exclusions
 !command/test-fixtures/**/*.tfstate

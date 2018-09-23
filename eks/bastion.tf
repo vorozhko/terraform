@@ -1,10 +1,26 @@
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
+}
 
 resource "aws_instance" "bastion" {
-  ami                         = "ami-0ac019f4fcb7cb7e6"#"ami-00035f41c82244dab"
+  ami                         = "${data.aws_ami.ubuntu.id}"
   instance_type               = "t2.micro"
   associate_public_ip_address = true
   key_name                    = "xps"
-  security_groups             = ["${aws_security_group.bastion-sg.name}"]
+  vpc_security_group_ids      = ["${aws_security_group.bastion-sg.id}"]
+  subnet_id                   = "${module.vpc.public_subnets[0]}"
   tags = {
       Name = "bastion",
       Terrafrom = "True"

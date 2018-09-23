@@ -1,9 +1,9 @@
 
 resource "aws_instance" "bastion" {
-  ami                         = "ami-00035f41c82244dab"
+  ami                         = "ami-0ac019f4fcb7cb7e6"#"ami-00035f41c82244dab"
   instance_type               = "t2.micro"
   associate_public_ip_address = true
-  key_name                    = "eks-worker-ssh-key"
+  key_name                    = "xps"
   security_groups             = ["${aws_security_group.bastion-sg.name}"]
   tags = {
       Name = "bastion",

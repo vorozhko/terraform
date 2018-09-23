@@ -21,12 +21,14 @@ locals {
   # )}"
 
   worker_groups = "${list(
-    map("instance_type","t2.small",
+    map("instance_type","t2.medium",
       "additional_userdata","echo foo bar",
+      "key_name","xps",
       "subnets", "${join(",", module.vpc.private_subnets)}",
     ),
-    map("instance_type","t2.small",
+    map("instance_type","t2.medium",
       "additional_userdata","echo foo bar",
+      "key_name","xps",
       "subnets", "${join(",", module.vpc.private_subnets)}",
     )
   )}"
@@ -46,4 +48,5 @@ module "eks" {
   worker_groups         = "${local.worker_groups}"
   worker_group_count    = "2"
   config_output_path	= "./.terraform/eks-config"
+
 }
